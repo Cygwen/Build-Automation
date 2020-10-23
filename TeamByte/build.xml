@@ -10,7 +10,7 @@
         <delete dir="doc"/>
         <delete dir="jar"/>
     </target>
-
+    <description> Below is the script that compiles a specified class </description>
     <target name="compile" depends="clean">
         <mkdir dir="build/classes"/>
         <input message="Enter the java file to be compile..."
@@ -21,11 +21,16 @@
                includeantruntime="false"
                includes="${compiledFile}" />
     </target>
+
+    <description> Below is the script that compiles all the java files in the src
+    directory </description>
     <target name="compileAll">
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
     </target>
 
+    <description> Below is the script that generates a jar file for
+    documentation and compile </description>
     <target name="jar" depends="documentation,compile">
         <mkdir dir="jar"/>
         <jar destfile="jar/Documentation.jar" basedir="doc">
@@ -40,8 +45,8 @@
         </jar>
     </target>
 
-    <description>Below is a script that automates the generation of documentation from
-    the different java classes</description>
+    <description> Below is the script that automates the generation of documentation from
+    the different java classes </description>
     <target name="documentation" depends="clean">
         <delete dir="doc" />
         <mkdir dir="doc" />
