@@ -1,73 +1,59 @@
-<project name="Fraction" basedir="." default="main">
+<project name="Build-Automation" basedir="." default="main">
 
-    <target name="init">
- 	<property name="src.dir"     value="src"/>
-`	<property name="build.dir"   value="build"/>
-	<property name="classes.dir" value="${build.dir}/classes"/>
-	<property name="jar.dir"     value="${build.dir}/jar"/>
-	<property name="main-class"  value="edu.slu.prog2.FractionMain"/>
-    </target>
-
-    
-    <target name="input">
- 	<input message="What java file would you like to compile?"
-	addproperty="java-file" validargs="Fraction,FractionMain,MixedFraction"/>
-	<condition property name="Fraction">
-		<value="edu.slu.prog2.Fraction"/>
-	</condition>
-	<condition property name="FractionMain">
-		<value="edu.slu.prog2.FractionMain"/>
-	</condition>
-	<condition property name="MixedFraction">
-		<value="edu.slu.prog2.MixedFraction"/>
-	</condition>
-    </target>
-
-   
+    <property name="src.dir"     value="src"/>
+    <property name="build.dir"   value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
 
     <target name="clean">
-        <delete dir="${build.dir}"/>
+        <delete dir="build"/>
+        <delete dir="doc"/>
+        <delete dir="jar"/>
     </target>
 
-    <target name="compile" depends="input">
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <input message="Enter the java file to be compile..."
+               validargs="Fraction.java,FractionMain.java,MixedFraction.java,NoDenominatorException.java,NoNumeratorException.java,NoWholeException.java"
+               addproperty="compiledFile"/>
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               includeantruntime="false"
+               includes="${compiledFile}" />
+    </target>
+    <target name="compileAll">
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
     </target>
 
-    <target name="jar" depends="compile">
-        <mkdir dir="${jar.dir}"/>
-        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+    <target name="jar" depends="documentation,compile">
+        <mkdir dir="jar"/>
+        <jar destfile="jar/Documentation.jar" basedir="doc">
             <manifest>
-                <attribute name="Main-Class" value="${main-class}"/>
+                <attribute name="Main-Class" value="doc"/>
+            </manifest>
+        </jar>
+        <jar destfile="jar/Compile.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="build/classes"/>
             </manifest>
         </jar>
     </target>
 
-    <target name="run" depends="jar">
-        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
-    </target>
-
-    <target name="clean-build" depends="clean,jar"/>
-
-    <target name="main" depends="clean,run"/>
-
-</project>
-
-<project basedir='.' name='DocsAutomation' default='default'>
-
-    <property name='source.dir' value='.' />
-    <property name='doc.dir' value='./doc' />
-
-    <target name="default">
-        <delete dir='${doc.dir}' />
-        <mkdir dir='doc' />
-        <javadoc sourcepath='${source.dir}' destdir='${doc.dir}'>
-            <fileset dir="." />
+    <description>Below is a script that automates the generation of documentation from
+    the different java classes</description>
+    <target name="documentation" depends="clean">
+        <delete dir="doc" />
+        <mkdir dir="doc" />
+        <javadoc sourcepath="src" destdir="doc">
+            <fileset dir="src" />
 
             <doctitle>
-                <![CDATA[<h1>Fraction</h1>]]>
+                <![CDATA[<h1>Build-Automation</h1>]]>
             </doctitle>
         </javadoc>
     </target>
-</project>
 
+    <target name="main" depends="clean,compile,documentation,jar"/>
+
+</project>

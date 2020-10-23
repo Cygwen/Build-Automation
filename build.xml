@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project basedir='.' name='DocsAutomation' default='default'>
+
+    <property name='source.dir' value='./src/edu.slu.prog2' />
+    <property name='doc.dir' value='./doc' />
+
+    <target name='default'>
+        <delete dir='${doc.dir}' />
+        <mkdir dir='${doc.dir}' />
+        <javadoc sourcepath='${source.dir}' destdir='${doc.dir}'>
+            <fileset dir='.' />
+
+            <doctitle>
+                <![CDATA[<h1>Fraction</h1>]]>
+            </doctitle>
+
+        </javadoc>
+    </target>
+</project>

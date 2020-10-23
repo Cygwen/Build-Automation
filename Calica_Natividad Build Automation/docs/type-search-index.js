@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"edu.slu.prog2","l":"Fraction"}]

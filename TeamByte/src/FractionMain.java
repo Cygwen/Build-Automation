@@ -1,4 +1,4 @@
-package edu.slu.prog2;
+
 
 import java.util.Scanner;
 
