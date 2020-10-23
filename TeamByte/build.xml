@@ -5,6 +5,8 @@
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir"     value="${build.dir}/jar"/>
 
+    <description> Below is the script that cleans all (delete) the generated files from
+    the previous run of build.xml </description>
     <target name="clean">
         <delete dir="build"/>
         <delete dir="doc"/>
