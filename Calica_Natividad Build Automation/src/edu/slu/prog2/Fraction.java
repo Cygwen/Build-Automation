@@ -91,7 +91,6 @@ public class Fraction {
         return (numerator + "/" + denominator);
     }
 
-
     /**
      * Converts integer output of fraction to double output
      * @return Double equivalent of fraction
