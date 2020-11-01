@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Build-Automation.iml" filepath="$PROJECT_DIR$/.idea/Build-Automation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Calica_Natividad Build Automation/Calica_Natividad Build Automation.iml" filepath="$PROJECT_DIR$/Calica_Natividad Build Automation/Calica_Natividad Build Automation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TeamByte/TeamByte.iml" filepath="$PROJECT_DIR$/TeamByte/TeamByte.iml" />
+    </modules>
+  </component>
+</project>
