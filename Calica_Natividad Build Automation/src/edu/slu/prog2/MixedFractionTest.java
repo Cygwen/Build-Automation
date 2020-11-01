@@ -7,66 +7,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class MixedFractionTest {
 
     @Test
-    void toFraction() {
-    }
+   public void testMixedFractionAdd () {
 
-    @Test
-    void testToFraction() {
-    }
+        /**
+         * Add two Mixed Fraction with common denominators
+         */
+        MixedFraction mf1 = new MixedFraction(4,8,2);
+        MixedFraction mf2 = new MixedFraction(5,8,4);
+        MixedFraction res = new MixedFraction(mf1.add(mf2));
+        res.reduce();
+        assertEquals("7 1/8",res.toString());
 
-    @Test
-    void toMixedFraction() {
-    }
 
-    @Test
-    void testToMixedFraction() {
-    }
-
-    @Test
-    void add() {
-    }
-
-    @Test
-    void testAdd() {
-    }
-
-    @Test
-    void testAdd1() {
-    }
-
-    @Test
-    void subtract() {
-    }
-
-    @Test
-    void testSubtract() {
-    }
-
-    @Test
-    void testSubtract1() {
-    }
-
-    @Test
-    void multiplyBy() {
-    }
-
-    @Test
-    void testMultiplyBy() {
-    }
-
-    @Test
-    void testMultiplyBy1() {
-    }
-
-    @Test
-    void divideBy() {
-    }
-
-    @Test
-    void testDivideBy() {
-    }
-
-    @Test
-    void testDivideBy1() {
     }
 }
