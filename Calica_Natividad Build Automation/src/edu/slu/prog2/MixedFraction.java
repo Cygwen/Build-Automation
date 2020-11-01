@@ -5,7 +5,7 @@ package edu.slu.prog2;
  *  mixed fractions and inherited some of
  *  its functions from the Fraction class.
  *
- * @author Pineda, Benedict Jr. and Calica, Gwyneth
+ * @author Natividad, Hudson Kit P. and Calica, Gwyneth
  */
 public class MixedFraction extends Fraction {
 
