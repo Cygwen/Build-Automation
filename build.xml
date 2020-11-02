@@ -1,0 +1,87 @@
+<project name="Build-Automation" basedir="." default="main">
+
+    <property name="src.dir"     value="src"/>
+    <property name="build.dir"   value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+
+    <description> Below is the script that cleans all (delete) the generated files from
+        the previous run of build.xml </description>
+    <target name="clean">
+        <delete dir="build"/>
+        <delete dir="doc"/>
+        <delete dir="jar"/>
+    </target>
+    <description> Below is the script that compiles a specified class </description>
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <input message="Enter the java file to be compile..."
+               validargs="Fraction.java,FractionMain.java,MixedFraction.java,NoDenominatorException.java,NoNumeratorException.java,NoWholeException.java"
+               addproperty="compiledFile"/>
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               includeantruntime="false"
+               includes="${compiledFile}" />
+    </target>
+
+    <description> Below is the script that compiles all the java files in the src
+        directory </description>
+    <target name="compileAll">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+    </target>
+
+    <description> Below is the script that generates a jar file for
+        documentation and compile </description>
+    <target name="jar" depends="documentation,compile">
+        <mkdir dir="jar"/>
+        <jar destfile="jar/Documentation.jar" basedir="doc">
+            <manifest>
+                <attribute name="Main-Class" value="doc"/>
+            </manifest>
+        </jar>
+        <jar destfile="jar/Compile.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="build/classes"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <description> Below is the script that automates the generation of documentation from
+        the different java classes </description>
+    <target name="documentation" depends="clean">
+        <delete dir="doc" />
+        <mkdir dir="doc" />
+        <javadoc sourcepath="src" destdir="doc">
+            <fileset dir="src" />
+
+            <doctitle>
+                <![CDATA[<h1>Build-Automation</h1>]]>
+            </doctitle>
+        </javadoc>
+    </target>
+
+    <target name="main" depends="clean,compile,documentation,jar,testrun,report"/>
+
+    <target name="testrun">
+        <mkdir dir="junit-reports" />
+        <junit>
+            <classpath location="lib/junit-4.11.jar" />
+            <classpath location="lib/hamcrest-core-1.3.jar" />
+            <test name="FractionTest"/>
+            <test name="MixedFractionTest"/>
+        </junit>
+    </target>
+
+    <target name="report" depends="testrun">
+        <junit printsummary="yes" fork="yes" haltonfailure="no">
+            <formatter type="plain"/>
+            <classpath location="lib/junit-4.11.jar" />
+            <classpath location="lib/hamcrest-core-1.3.jar" />
+            <test name="FractionTest" todir="junit-reports"/>
+            <test name="MixedFractionTest" todir="junit-reports"/>
+        </junit>
+    </target>
+
+
+</project>

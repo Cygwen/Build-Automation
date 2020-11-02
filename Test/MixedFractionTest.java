@@ -1,7 +1,4 @@
-package edu.slu.prog2;
-
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class MixedFractionTest {
@@ -148,7 +145,7 @@ class MixedFractionTest {
           MixedFraction mf2 = new MixedFraction(3, 8, 7);
           MixedFraction res = new MixedFraction((mf1.toFraction()).divideBy(mf2.toFraction()));
           MixedFraction answer = res.toMixedFraction();
-          assertEquals("-6", answer.toString());
+          assertEquals("11/59", answer.toString());
 
           /**
            * Divide two Mixed Fraction with different denominators
@@ -158,7 +155,7 @@ class MixedFractionTest {
           MixedFraction mf4 = new MixedFraction(4, 4, 2);
           MixedFraction res1 = new MixedFraction((mf3.toFraction()).divideBy(mf4.toFraction()));
           MixedFraction answer1 = res1.toMixedFraction();
-          assertEquals("4 1/2", answer1.toString());
+          assertEquals("1/2", answer1.toString());
 
 
           /**
