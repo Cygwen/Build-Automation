@@ -1,9 +1,49 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.awt.font.FontRenderContext;
+
 
 public class MixedFractionTest extends MixedFraction{
 
+     @Test
+     public void MixedFractionTest() {
+          /**
+           * Proper Mixed Fraction
+           */
+          MixedFraction mf = new MixedFraction(12,17,99);
+          Assert.assertEquals("99 12/17",mf.toString());
+          /**
+           * Improper Mixed Fraction
+           */
+          MixedFraction mf1 = new MixedFraction(24,12,10);
+          Assert.assertEquals("10 24/12",mf1.toString());
+     }
+
+     @Test
+     public void setWholePartTest() {
+          MixedFraction mf = new MixedFraction(12,24,2);
+          mf.setWholePart(14);
+          Assert.assertEquals("14 12/24", mf.toString());
+     }
+
+     @Test
+     public void setFractionPartTest() {
+          MixedFraction mf = new MixedFraction(12,24,2);
+          Fraction f = new Fraction(24,12);
+          mf.setFractionPart(f);
+          Assert.assertEquals("2 24/12",mf.toString());
+     }
+
+     @Test
+     public void MixedFractionExisting() {
+          /**
+           * Adding Whole Number to existing Fraction
+           */
+          Fraction f = new Fraction(12,17);
+          MixedFraction mf = new MixedFraction(24,f);
+          Assert.assertEquals("24 12/17",mf.toString());
+     }
     @Test
    public void testMixedFractionAdd () {
         /**

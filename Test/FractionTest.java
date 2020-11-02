@@ -4,6 +4,83 @@ import org.junit.Test;
 public class FractionTest extends Fraction {
 
     @Test
+    public void testFractionWhlNum(){
+        /**
+         * Positive Number input
+         */
+        Fraction f = new Fraction(17);
+        Assert.assertEquals(17,f.getNumerator());
+        /**
+         * Negative Number input
+         */
+        Fraction f1 = new Fraction(-17);
+        Assert.assertEquals(-17,f1.getNumerator());
+    }
+
+    @Test
+    public void testFractConst() {
+        /**
+         * Positive Proper Fraction
+         */
+        Fraction f = new Fraction(12,17);
+        Assert.assertEquals("12/17",f.toString());
+        /**
+         * Negative Proper Fraction
+         */
+        Fraction f1 = new Fraction(-12,-17);
+        Assert.assertEquals("-12/-17",f1.toString());
+    }
+
+    @Test
+    public void setNumberatorAndDenominatorTest() {
+        /**
+         * Test for set Numerator
+         */
+        Fraction f = new Fraction(16,18);
+        f.setNumerator(17);
+        Assert.assertEquals("17/18",f.toString());
+        /**
+         * Test for set Denominator
+         */
+        Fraction f1 = new Fraction(16,17);
+        f1.setDenominator(21);
+        Assert.assertEquals("16/21",f1.toString());
+        /**
+         * Test for both Setters
+         */
+        Fraction f2 = new Fraction(12,17);
+        f2.setNumerator(21);
+        f2.setDenominator(25);
+        Assert.assertEquals("21/25",f2.toString());
+    }
+
+    @Test
+    public void toStringTest() {
+        /**
+         * Test for int to string
+         */
+        Fraction f = new Fraction(12,17);
+        String f1 = f.toString();
+        Assert.assertEquals("12/17",f1);
+    }
+
+    @Test
+    public void toDoubleTest(){
+        /**
+         * Convert Fraction to Double (Positive)
+         */
+        Fraction f = new Fraction(12,24);
+        Double res = f.toDouble();
+        Assert.assertEquals("0.5",res.toString());
+        /**
+         * Convert Fraction to Double (Negative)
+         */
+        Fraction f1 = new Fraction(-22,-24);
+        Double res1 = f1.toDouble();
+        Assert.assertEquals("0.9166666666666666",res1.toString());
+    }
+
+    @Test
     public void testReduce() {
         /**
          * Proper Fraction
