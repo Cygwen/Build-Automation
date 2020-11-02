@@ -101,10 +101,10 @@ class MixedFractionTest {
            */
 
           MixedFraction mf1 = new MixedFraction(3, 8, 1);
-          MixedFraction mf2 = new MixedFraction(3, 8, 7);
+          MixedFraction mf2 = new MixedFraction(6, 8, 7);
           MixedFraction res = new MixedFraction((mf1.toFraction()).multiplyBy(mf2.toFraction()));
           MixedFraction answer = res.toMixedFraction();
-          assertEquals("-6", answer.toString());
+          assertEquals("10 21/32", answer.toString());
 
           /**
            * Multiply two Mixed Fraction with different denominators
@@ -114,7 +114,7 @@ class MixedFractionTest {
           MixedFraction mf4 = new MixedFraction(5, 16, 4);
           MixedFraction res1 = new MixedFraction((mf3.toFraction()).multiplyBy(mf4.toFraction()));
           MixedFraction answer1 = res1.toMixedFraction();
-          assertEquals("-1 -41/80", answer1.toString());
+          assertEquals("12 3/40", answer1.toString());
 
 
           /**
@@ -124,7 +124,7 @@ class MixedFractionTest {
           MixedFraction mf = new MixedFraction(6,22,4);
           Fraction res2 = mf.toFraction().multiplyBy(f);
           MixedFraction answer2 = new MixedFraction();
-          assertEquals("3 17/22",(answer2.toMixedFraction(res2)).toString());
+          assertEquals("2 3/22",(answer2.toMixedFraction(res2)).toString());
 
           /**
            * Mulitply Mixed and whole number
@@ -134,7 +134,7 @@ class MixedFractionTest {
           Fraction wf = new Fraction(wholeNum);
           Fraction res3 = (mf5.toFraction()).multiplyBy(wf);
           MixedFraction answer3 = new MixedFraction();
-          assertEquals("-19 -8/11",(answer3.toMixedFraction(res3)).toString());
+          assertEquals("102 6/11",(answer3.toMixedFraction(res3)).toString());
 
      }
 
@@ -154,31 +154,31 @@ class MixedFractionTest {
            * Divide two Mixed Fraction with different denominators
            */
 
-          MixedFraction mf3 = new MixedFraction(4, 5, 2);
-          MixedFraction mf4 = new MixedFraction(5, 16, 4);
+          MixedFraction mf3 = new MixedFraction(2, 4, 1);
+          MixedFraction mf4 = new MixedFraction(4, 4, 2);
           MixedFraction res1 = new MixedFraction((mf3.toFraction()).divideBy(mf4.toFraction()));
           MixedFraction answer1 = res1.toMixedFraction();
-          assertEquals("-1 -41/80", answer1.toString());
+          assertEquals("4 1/2", answer1.toString());
 
 
           /**
            * Divide Mixed and Proper fraction
            */
-          Fraction f = new Fraction(12,24);
-          MixedFraction mf = new MixedFraction(6,22,4);
+          Fraction f = new Fraction(2,5);
+          MixedFraction mf = new MixedFraction(1,2,3);
           Fraction res2 = mf.toFraction().divideBy(f);
           MixedFraction answer2 = new MixedFraction();
-          assertEquals("3 17/22",(answer2.toMixedFraction(res2)).toString());
+          assertEquals("8 3/4",(answer2.toMixedFraction(res2)).toString());
 
           /**
            * Divide Mixed and whole number
            */
-          int wholeNum = 24;
-          MixedFraction mf5 = new MixedFraction(6,22,4);
+          int wholeNum = 8;
+          MixedFraction mf5 = new MixedFraction(1,3,3);
           Fraction wf = new Fraction(wholeNum);
           Fraction res3 = (mf5.toFraction()).divideBy(wf);
           MixedFraction answer3 = new MixedFraction();
-          assertEquals("-19 -8/11",(answer3.toMixedFraction(res3)).toString());
+          assertEquals("5/12",(answer3.toMixedFraction(res3)).toString());
 
      }
 }
