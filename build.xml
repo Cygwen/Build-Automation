@@ -1,4 +1,5 @@
-<project name="Build-Automation" basedir="." default="main">
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Build-Automation" basedir="."  default="main" xmlns:jacoco="antlib:org.jacoco.ant">
 
     <property name="src.dir"     value="src"/>
     <property name="build.dir"   value="build"/>
@@ -7,6 +8,10 @@
     <property name="junit-reports.dir" value="${build.dir}/junit-reports" />
     <property name="Test.dir" value="Test" />
 
+    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+        <classpath path="lib/jacocoant.jar"/>
+    </taskdef>
+
     <description> Below is the script that cleans all (delete) the generated files from
         the previous run of build.xml </description>
     <target name="clean">
@@ -14,6 +19,7 @@
         <delete dir="doc"/>
         <delete dir="jar"/>
         <delete dir="junit-reports" />
+        <delete dir="coverage-report" />
     </target>
     <description> Below is the script that compiles a specified class </description>
     <target name="compile" depends="clean">
@@ -69,10 +75,14 @@
     <target name="testRun">
         <mkdir dir="junit-reports" />
         <javac srcdir="${Test.dir}" destdir="${classes.dir}" includeantruntime="false">
+
             <classpath location="lib/junit-4.11.jar" />
             <classpath location="lib/hamcrest-core-1.3.jar" />
+
         </javac>
+        <jacoco:coverage>
         <junit printsummary="yes" fork="yes" haltonfailure="no">
+
             <formatter type="plain"/>
             <classpath location="lib/junit-4.11.jar" />
             <classpath location="lib/hamcrest-core-1.3.jar" />
@@ -80,6 +90,25 @@
             <test name="FractionTest" todir="junit-reports" outfile="res-fracTest"/>
             <test name="MixedFractionTest" todir="junit-reports" outfile="res-mixedFracTest" />
         </junit>
+        </jacoco:coverage>
+
+        <mkdir dir="coverage-report"/>
+        <jacoco:report>
+            <executiondata>
+                <file file="jacoco.exec" />
+            </executiondata>
+            <structure name="Fraction/MixedFraction">
+                <classfiles>
+                    <fileset dir="build/classes"/>
+                </classfiles>
+                <sourcefiles encoding="UTF-8">
+                    <fileset dir="src"/>
+                </sourcefiles>
+            </structure>
+            <html destdir="coverage-report"/>
+
+        </jacoco:report>
     </target>
+
 
 </project>
