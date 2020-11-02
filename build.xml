@@ -4,6 +4,8 @@
     <property name="build.dir"   value="build"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir"     value="${build.dir}/jar"/>
+    <property name="junit-reports.dir" value="${build.dir}/junit-reports" />
+    <property name="Test.dir" value="Test" />
 
     <description> Below is the script that cleans all (delete) the generated files from
         the previous run of build.xml </description>
@@ -11,6 +13,7 @@
         <delete dir="build"/>
         <delete dir="doc"/>
         <delete dir="jar"/>
+        <delete dir="junit-reports" />
     </target>
     <description> Below is the script that compiles a specified class </description>
     <target name="compile" depends="clean">
@@ -61,27 +64,22 @@
         </javadoc>
     </target>
 
-    <target name="main" depends="clean,compile,documentation,jar,testrun,report"/>
+    <target name="main" depends="clean,compileAll,documentation,jar,testRun" />
 
-    <target name="testrun">
+    <target name="testRun">
         <mkdir dir="junit-reports" />
-        <junit>
+        <javac srcdir="${Test.dir}" destdir="${classes.dir}" includeantruntime="false">
             <classpath location="lib/junit-4.11.jar" />
             <classpath location="lib/hamcrest-core-1.3.jar" />
-            <test name="FractionTest"/>
-            <test name="MixedFractionTest"/>
-        </junit>
-    </target>
-
-    <target name="report" depends="testrun">
+        </javac>
         <junit printsummary="yes" fork="yes" haltonfailure="no">
             <formatter type="plain"/>
             <classpath location="lib/junit-4.11.jar" />
             <classpath location="lib/hamcrest-core-1.3.jar" />
-            <test name="FractionTest" todir="junit-reports"/>
-            <test name="MixedFractionTest" todir="junit-reports"/>
+            <classpath location="${build.dir}/classes" />
+            <test name="FractionTest" todir="junit-reports" outfile="res-fracTest"/>
+            <test name="MixedFractionTest" todir="junit-reports" outfile="res-mixedFracTest" />
         </junit>
     </target>
-
 
 </project>
